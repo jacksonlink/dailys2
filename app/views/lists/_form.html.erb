@@ -26,6 +26,11 @@
     <%= form.check_box :impediment %>
   </div>
 
+  <div class="field">
+    <%= form.label :user %>
+    <%= collection_select(:list, :user_id, User.all, :id, :email) %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
