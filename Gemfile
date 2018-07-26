@@ -37,6 +37,14 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'devise'
+gem 'seed_dump'
+gem 'cancancan'
+gem 'rails_admin'
+
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails"
+gem 'devise-bootstrap-views'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

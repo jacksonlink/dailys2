@@ -1,37 +1,58 @@
-<%= form_with(model: list, local: true) do |form| %>
-  <% if list.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(list.errors.count, "error") %> prohibited this list from being saved:</h2>
+<%= form_for @list, :html => { :class => "form-horizontal list" } do |f| %>
 
-      <ul>
-      <% list.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @list.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@list.errors.count, "error") %> prohibited this list from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @list.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :today %>
-    <%= form.text_field :today %>
+  <div class="form-group">
+    <%= f.label :today, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :today, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:today) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :yesterday, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :yesterday, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:yesterday) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :impediment, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :impediment, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:impediment) %>
   </div>
 
-  <div class="field">
-    <%= form.label :yesterday %>
-    <%= form.text_field :yesterday %>
+  <div class="form-group">
+    <%= f.label :user, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= collection_select(:list, :user_id, User.all, :id, :email,
+                            {:selected => current_user.id},
+                            {class: "form-control", :disabled => "disabled"})  %>
+      </div>
   </div>
 
-  <div class="field">
-    <%= form.label :impediment %>
-    <%= form.check_box :impediment %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                lists_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :user %>
-    <%= collection_select(:list, :user_id, User.all, :id, :email) %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
