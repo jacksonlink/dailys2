@@ -23,6 +23,11 @@
           <%= collection_select(:user, :team_id, Team.all, :id, :name, {:prompt=>true}, {:class=>'form-control'}) %>
       </div>
 
+      <div class="form-group">
+        <%= f.label :role, :class => 'control-label' %>
+        <%= f.select :role, options_for_select([["Developer", "developer"], ["Responsible", "responsible"]]), {}, {:class=>'form-control'}  %>
+      </div>
+
       <%= f.submit t('.sign_up', default: 'Sign up'), class: 'btn btn-primary' %>
     <% end %>
   </div>

@@ -6,6 +6,8 @@ class ResponsiblesController < ApplicationController
   # GET /responsibles.json
   def index
     @responsibles = Responsible.all
+    @users = User.all
+    authorize @users
   end
 
   # GET /responsibles/1

@@ -29,23 +29,16 @@
     </div>
     <%=f.error_span(:yesterday) %>
   </div>
+
   <div class="form-group">
     <%= f.label :impediment, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :impediment, :class => 'form-control' %>
+      <%= f.check_box :impediment, :class => 'btn' %>
     </div>
     <%=f.error_span(:impediment) %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :user, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= collection_select(:list, :user_id, User.all, :id, :email,
-                            {:selected => current_user.id},
-                            {class: "form-control", :disabled => "disabled"})  %>
-      </div>
-  </div>
-
+  <%= f.hidden_field :user_id, value: current_user.id %>
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">

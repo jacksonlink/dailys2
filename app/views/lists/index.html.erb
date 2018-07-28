@@ -10,19 +10,22 @@
       <th><%= model_class.human_attribute_name(:yesterday) %></th>
       <th><%= model_class.human_attribute_name(:impediment) %></th>
       <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:team) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
+
   <tbody>
-    <% @lists.each do |list| %>
+    <% @lists.each do |list, index| %>
       <tr>
         <td><%= link_to list.id, list_path(list) %></td>
         <td><%= list.today %></td>
         <td><%= list.yesterday %></td>
         <td><%= list.impediment %></td>
-        <td><%= list.user_id %></td>
-        <td><%=l list.created_at %></td>
+        <td><%= User.where(id: list.user_id).take.email %></td>
+        <td><%= @team.name %></td>
+        <td><%= list.created_at %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       list_path(list), :class => 'btn btn-default btn-xs' %>

@@ -6,7 +6,34 @@ class ListsController < ApplicationController
   # GET /lists
   # GET /lists.json
   def index
-    @lists = List.all
+    #@lists = List.all
+
+    # Validate the user role: if developer then filter only lists created by himself
+    #                         else filter all lists created by users who belongs to his team
+    if current_user.role == "developer"
+      
+      @lists = List.where(user_id: current_user.id).order('id DESC')
+      #@user = User.where(id: @lists.first.user_id).take
+      #@team = Team.where(id: @user.team_id).take
+    
+    else
+    
+      #@lists = List.all
+      
+      @users = User.where(team_id: current_user.team.id).all
+      
+      @users.each do |user|
+         @lists = List.where(user_id: User.where(team_id: current_user.team.id).all)
+      end
+      
+      @lists.each do |list|
+        @users_mail = User.where(id: list.user_id).take.email
+      end
+      
+      @team = Team.where(id: current_user.team.id).take
+
+    end
+
   end
 
   # GET /lists/1
