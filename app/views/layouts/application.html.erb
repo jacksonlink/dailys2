@@ -57,7 +57,6 @@
             <ul class="nav nav-list">
               <% if current_user %>
                 <% if current_user.role == "responsible" %>
-                  <li><%= link_to "Responsibles", responsibles_path %></li>
                   <li><%= link_to "Teams", teams_path %></li>
                   <li><%= link_to "Users", control_users_index_path  %></li>
                   <li><%= link_to "Lists", lists_path  %></li>
